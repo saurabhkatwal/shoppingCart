@@ -24,7 +24,7 @@ let reducerFn=(state={productsData:data.products,
         xl:false,
         xxl:false
     },activeButtons:[],
-    filteredData:[]
+    filteredData:data.products
 },action)=>{
     if(action.type==="click"){
         let text=action.obj.target.innerText;
