@@ -5,6 +5,14 @@ import Content from "../components/Content.js";
 import data from "./products.js"
 import Size from "../components/Size"
 console.log(data)
+const isPresent=(sizes,product)=>{
+    for(let i=0;i<sizes.length;i++){
+        if(product.availableSizes.includes(sizes[i].toUpperCase())){
+            return true;
+        }
+    }
+    return false;
+  }
 let reducerFn=(state={productsData:data.products,
     sizes:["xs","s","m","ml","l","xl","xxl"],
     activeToggles:{
@@ -15,7 +23,8 @@ let reducerFn=(state={productsData:data.products,
         l:false,
         xl:false,
         xxl:false
-    },filteredData:[]
+    },activeButtons:[],
+    filteredData:[]
 },action)=>{
     if(action.type==="click"){
         let text=action.obj.target.innerText;
@@ -27,7 +36,11 @@ let reducerFn=(state={productsData:data.products,
         }).map(positive=>{
             return positive[0]
         })
-        state.filteredData=positives
+        state.activeButtons=positives
+        let sizes=state.activeButtons;
+        state.filteredData=state.productsData.filter(product=>{
+            return isPresent(sizes,product);
+        })
     }
     return state;
 }
