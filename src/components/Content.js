@@ -7,7 +7,7 @@ export default class Content extends Component {
   render() {
     // console.log(productsData)
     return (
-      <div>
+      <div className='main'>
         <Filter/>
         <Cards/>
       </div>

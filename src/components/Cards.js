@@ -5,8 +5,8 @@ export class Cards extends Component {
   render() {
     console.log(this.props.productsData)
     return (
-      <div>
-        {this.props.productsData.map(data=><Card itemId={data.id}/>)}
+      <div className='cards'>
+        {this.props.productsData.map(data=><Card data={data}/>)}
       </div>
     )
   }
