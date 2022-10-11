@@ -1,6 +1,9 @@
-import { createStore } from "redux";
+import { createStore,applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension"
+import logger from "redux-logger"
 import Content from "../components/Content.js";
 import data from "./products.js"
+import Size from "../components/Size"
 console.log(data)
 let reducerFn=(state={productsData:data.products,
     sizes:["xs","s","m","ml","l","xl","xxl"],
@@ -12,14 +15,25 @@ let reducerFn=(state={productsData:data.products,
         l:false,
         xl:false,
         xxl:false
-    }
+    },filteredData:[]
 },action)=>{
     if(action.type==="click"){
-        console.log(action.obj.target.innerText)
+        let text=action.obj.target.innerText;
+        console.log(text);
+        state.activeToggles[text]=!state.activeToggles[text];
+        let activeToggleEntries=Object.entries(state.activeToggles)
+        let positives=activeToggleEntries.filter(entry=>{
+            return entry[1];
+        }).map(positive=>{
+            return positive[0]
+        })
+        state.filteredData=positives
     }
     return state;
 }
-let store=createStore(reducerFn);
+let store=createStore(reducerFn,composeWithDevTools(
+    applyMiddleware(logger)
+  ));
 // store.subscribe(Content);
 // console.log(store.getState())
 export default store
