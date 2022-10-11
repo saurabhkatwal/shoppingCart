@@ -16,9 +16,9 @@ const mapStateToProps=(state)=>{
     productsData:state.productsData
   }
   }
-  const mapDispatchToProps=(dispatch)=>{
-  return {
+  // const mapDispatchToProps=(dispatch)=>{
+  // return {
     
-  }
-  }
-  export default connect(mapStateToProps,mapDispatchToProps)(Cards)
+  // }
+  // }
+  export default connect(mapStateToProps)(Cards)

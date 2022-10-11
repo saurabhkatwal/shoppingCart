@@ -35,3 +35,36 @@ code {
 img{
   width: 100%;
 }
+.filterSize{
+  width: 40px;
+  height: 40px;
+  background-color: grey;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .filterSize label{
+  display: block;
+ width: 40px;
+ height: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+} */
+/* .filterSize input{
+  position:absolute;
+  visibility:hidden;
+} */
+.filterSize button{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border:none;
+}
+.sizes{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:20px;
+}
