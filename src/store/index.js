@@ -27,20 +27,42 @@ let reducerFn=(state={productsData:data.products,
     filteredData:data.products
 },action)=>{
     if(action.type==="click"){
+        console.log("inside click event")
         let text=action.obj.target.innerText;
         console.log(text);
-        state.activeToggles[text]=!state.activeToggles[text];
-        let activeToggleEntries=Object.entries(state.activeToggles)
+        console.log("got the text")
+        let toggleState=JSON.parse(JSON.stringify(state.activeToggles));
+        console.log("copied values to togglestate")
+        // let newObj={...toggleState};
+        console.log(toggleState[text])
+        toggleState[text]=!state.activeToggles[text];
+        console.log("togglestate : ",toggleState);
+        // let toggleState=!state.activeToggles[text];
+        // console.log(state.activeToggles)
+        // state.activeToggles[text]=!state.activeToggles[text];
+        let activeToggleEntries=Object.entries(toggleState)
         let positives=activeToggleEntries.filter(entry=>{
             return entry[1];
         }).map(positive=>{
             return positive[0]
         })
-        state.activeButtons=positives
-        let sizes=state.activeButtons;
-        state.filteredData=state.productsData.filter(product=>{
+        console.log("positives "+positives)
+        // state.activeButtons=positives
+        let sizes=[...positives];
+        // state.filteredData
+        console.log("got the positives")
+        let dataFiltered
+        =state.productsData.filter(product=>{
             return isPresent(sizes,product);
         })
+        console.log("got the data filtered")
+        console.log("returning state");
+        return {
+            ...state,
+            activeButtons:[...positives],
+            filteredData:[...dataFiltered],
+            activeToggles:JSON.parse(JSON.stringify(toggleState))
+        }
     }
     return state;
 }

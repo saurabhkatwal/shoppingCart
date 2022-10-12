@@ -3,7 +3,7 @@ import Card from './Card'
 import { connect } from 'react-redux'
 export class Cards extends Component {
   render() {
-    console.log(this.props.filteredData)
+    console.log("filtered data"+this.props.filteredData)
     return (
       <div className='cards'>
         {this.props.filteredData.map(data=><Card data={data}/>)}
