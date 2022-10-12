@@ -60,7 +60,7 @@ let reducerFn=(state={productsData:data.products,
         return {
             ...state,
             activeButtons:[...positives],
-            filteredData:[...dataFiltered],
+            filteredData:(positives.length===0)?(state.productsData):([...dataFiltered]),
             activeToggles:JSON.parse(JSON.stringify(toggleState))
         }
     }
