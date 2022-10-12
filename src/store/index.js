@@ -4,7 +4,21 @@ import logger from "redux-logger"
 import Content from "../components/Content.js";
 import data from "./products.js"
 import Size from "../components/Size"
-console.log(data)
+import { click } from "@testing-library/user-event/dist/click.js";
+console.log("data ",data);
+
+let products=[];
+
+for(let i=0;i<data.products.length;i++){
+    console.log("executed")
+    let obj={...data.products[i],count:0};
+    products.push(obj);
+}
+
+console.log("after adding count property");
+
+console.log(products);
+
 const isPresent=(sizes,product)=>{
     for(let i=0;i<sizes.length;i++){
         if(product.availableSizes.includes(sizes[i].toUpperCase())){
@@ -13,7 +27,46 @@ const isPresent=(sizes,product)=>{
     }
     return false;
   }
-let reducerFn=(state={productsData:data.products,
+
+  const isPresentInCart=(insideCart,id)=>{
+    let [targetObj]=insideCart.filter(product=>{
+        return product.id==id;
+    })
+    if(targetObj){
+        return true;
+    }
+    else{
+        return false;
+    }
+  }
+
+const getObj=(productsN,id)=>{
+    console.log("value of products")
+    console.log(productsN);
+
+let [targetObj]=productsN.filter(product=>{
+    return product.id==id;
+})
+
+console.log("inside method");
+console.log("target");
+console.log(targetObj);
+console.log(targetObj.count)
+
+return targetObj;
+}
+
+const increaseCount=(productsN,id)=>{
+
+    let obj=JSON.parse(JSON.stringify(getObj(productsN,id)));
+    console.log("before",obj);
+    obj.count+=1;
+    console.log("after",obj);
+    return JSON.parse(JSON.stringify(obj));
+
+}
+
+let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
     sizes:["xs","s","m","ml","l","xl","xxl"],
     activeToggles:{
         xs:false,
@@ -24,39 +77,26 @@ let reducerFn=(state={productsData:data.products,
         xl:false,
         xxl:false
     },activeButtons:[],
-    filteredData:data.products
+    filteredData:JSON.parse(JSON.stringify(products)),
+    cartItems:[],
+    showCart:false
 },action)=>{
     if(action.type==="click"){
-        console.log("inside click event")
         let text=action.obj.target.innerText;
-        console.log(text);
-        console.log("got the text")
         let toggleState=JSON.parse(JSON.stringify(state.activeToggles));
-        console.log("copied values to togglestate")
-        // let newObj={...toggleState};
         console.log(toggleState[text])
         toggleState[text]=!state.activeToggles[text];
-        console.log("togglestate : ",toggleState);
-        // let toggleState=!state.activeToggles[text];
-        // console.log(state.activeToggles)
-        // state.activeToggles[text]=!state.activeToggles[text];
         let activeToggleEntries=Object.entries(toggleState)
         let positives=activeToggleEntries.filter(entry=>{
             return entry[1];
         }).map(positive=>{
             return positive[0]
         })
-        console.log("positives "+positives)
-        // state.activeButtons=positives
         let sizes=[...positives];
-        // state.filteredData
-        console.log("got the positives")
         let dataFiltered
         =state.productsData.filter(product=>{
             return isPresent(sizes,product);
         })
-        console.log("got the data filtered")
-        console.log("returning state");
         return {
             ...state,
             activeButtons:[...positives],
@@ -65,15 +105,49 @@ let reducerFn=(state={productsData:data.products,
         }
     }
     if(action.type==="cartClick"){
-        console.log("hello")
-        console.log(typeof action.obj1.target.parentElement.id)
-        return state;
-    }
+        let clickedId=action.obj.target.parentElement.id;
+        let insideCart=JSON.parse(JSON.stringify(state.cartItems))
+        let productsN=JSON.parse(JSON.stringify(state.productsData));
+        let returnedObj=increaseCount(productsN,clickedId);
+        for(let i=0;i<productsN.length;i++){
+            if(productsN[i].id==clickedId){
+                productsN[i].count+=1;
+            }
+        }
+        console.log("returned object ",returnedObj);
+        if(isPresentInCart(insideCart,clickedId)){
+            console.log("item is already in the cart")
+            for(let i=0;i<insideCart.length;i++){
+                if(insideCart[i].id==clickedId){
+                    console.log("object before change")
+                    console.log(insideCart[i]);
+                    insideCart[i]={...returnedObj};
+                    console.log("object after change")
+                }
+            }
+        }
+        else{
+            console.log("new item")
+            insideCart.push(returnedObj);
+            console.log(insideCart);
+        }
+        return {
+            ...state,
+            productsData:JSON.parse(JSON.stringify(productsN)),
+            cartItems:JSON.parse(JSON.stringify(insideCart))
+        }
+        }
+        if(action.type==="toggleCart"){
+            return{
+                ...state,
+                showCart:!state.showCart
+            }
+        }
     return state;
 }
+
 let store=createStore(reducerFn,composeWithDevTools(
     applyMiddleware(logger)
   ));
-// store.subscribe(Content);
-// console.log(store.getState())
+
 export default store

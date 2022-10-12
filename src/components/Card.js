@@ -24,7 +24,7 @@ return {}
 const mapDispatchToProps=(dispatch=>{
   return {
     cartClick:(e)=>{
-      dispatch({type:"cartClick",obj1:e})
+      dispatch({type:"cartClick",obj:e})
     }
   }
 })

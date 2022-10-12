@@ -71,8 +71,11 @@ img{
 .cart{
   position: fixed;
   top: 0;
-  right: 0;
+  right: -400px;
   cursor: pointer;
+  width: 400px;
+  height: 100vh;
+  background-color: #222;
 }
 .cart span{
   position: absolute;
@@ -85,6 +88,13 @@ button{
 }
 .cart i{
   color: #fff;
+  /* padding: 20px; */
+}
+.cart button{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: -50px;
   background-color:darkblue;
-  padding: 20px;
+  border: none;
 }
