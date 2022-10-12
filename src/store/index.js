@@ -4,7 +4,6 @@ import logger from "redux-logger"
 import Content from "../components/Content.js";
 import data from "./products.js"
 import Size from "../components/Size"
-import { click } from "@testing-library/user-event/dist/click.js";
 console.log("data ",data);
 
 let products=[];
@@ -79,7 +78,8 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
     },activeButtons:[],
     filteredData:JSON.parse(JSON.stringify(products)),
     cartItems:[],
-    showCart:false
+    showCart:false,
+    totalItems:0
 },action)=>{
     if(action.type==="click"){
         let text=action.obj.target.innerText;

@@ -144,3 +144,37 @@ button{
   padding: 10px;
   border: none;
 }
+.item{
+  display: flex;
+  height: 100px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: red;
+  padding: 10px;
+  background-color: rgba(0, 0, 0,1);
+}
+.img-container img{
+  width: 70px;
+}
+/* button.remove{
+  align-self: flex-start;
+} */
+.price-info{
+  display: flex;
+  flex-direction: column;
+}
+.btns{
+  display: flex;
+  column-gap: 10px;
+}
+.btns button{
+  width: 20px;
+  height: 20px;
+}
+/* .shop-menu{ */
+  /* overflow-y: scroll; */
+/* } */
+/* .cart{ */
+  /* background-color: red; */
+  /* overflow: auto; */
+/* } */

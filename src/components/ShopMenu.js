@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Items from './Items'
 
-export default class ShopMenu extends Component {
+export class ShopMenu extends Component {
   render() {
     return (
       <div className='shop-menu'>
@@ -11,7 +13,7 @@ export default class ShopMenu extends Component {
             <h2>Cart</h2>
         </div>
         <div className="menu-body">
-            <p>Add some products in cart</p>
+            {this.props.cartItems.length===0?<p>Add some products in cart</p>:<Items items={this.props.cartItems}/>}
         </div>
         <div className="menu-checkout">
             <div className="checkout-container">
@@ -31,3 +33,14 @@ export default class ShopMenu extends Component {
     )
   }
 }
+const mapStateToProps=(state)=>{
+return {
+    cartItems:state.cartItems
+}
+}
+const mapDispatchToProps=(dispatch)=>{
+return {
+
+}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ShopMenu);
