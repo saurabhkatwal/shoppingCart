@@ -75,6 +75,7 @@ img{
   cursor: pointer;
   width: 400px;
   height: 100vh;
+  transition:right 0.2s ease-in;
   background-color: #222;
 }
 .cart span{
@@ -90,11 +91,56 @@ button{
   color: #fff;
   /* padding: 20px; */
 }
-.cart button{
+.cartToggleIcon{
   position: absolute;
   width: 50px;
   height: 50px;
   left: -50px;
   background-color:darkblue;
+  border: none;
+  color: #fff;
+}
+.menu-header{
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  height: 130px;
+  align-items: center;
+}
+.menu-header h2{
+  color: #fff;
+}
+.menu-body p{
+  text-align: center;
+  margin-top: 10px;
+}
+.shop-menu{
+  color:#fff;
+  background-color: #1b1a20;
+}
+.menu-checkout{
+  height: 130px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.checkout-container{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 20px auto;
+  height: 100%;
+}
+.checkout-details{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.checkout-btn button{
+  width: 100%;
+  font-size: 25px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
   border: none;
 }
