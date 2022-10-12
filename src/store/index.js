@@ -64,6 +64,11 @@ let reducerFn=(state={productsData:data.products,
             activeToggles:JSON.parse(JSON.stringify(toggleState))
         }
     }
+    if(action.type==="cartClick"){
+        console.log("hello")
+        console.log(typeof action.obj1.target.parentElement.id)
+        return state;
+    }
     return state;
 }
 let store=createStore(reducerFn,composeWithDevTools(
