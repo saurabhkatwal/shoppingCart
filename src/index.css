@@ -173,10 +173,11 @@ button{
   width: 20px;
   height: 20px;
 }
-/* .shop-menu{ */
-  /* overflow-y: scroll; */
-/* } */
-/* .cart{ */
-  /* background-color: red; */
-  /* overflow: auto; */
-/* } */
+.menu-body{
+  height: 410px;
+  width: 100%;
+  overflow: auto;
+}
+.menu-body::-webkit-scrollbar{
+  display: none;
+}

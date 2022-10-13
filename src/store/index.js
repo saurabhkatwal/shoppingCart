@@ -19,21 +19,14 @@ console.log("after adding count property");
 console.log(products);
 
 const removeProducts=(productsToRemove,clickedId)=>{
-console.log("inside remove products");
-console.log(productsToRemove)
 let newProducts=productsToRemove.map(product=>{
     if(product.id==clickedId){
-        console.log("before")
-        console.log(product);
         product.count=0;
-        console.log(product)
-        console.log("after")
         return product;
     }
     return product;
 })
-console.log("after resetting count to 0")
-console.log(newProducts)
+return newProducts;
 }
 const getTotalCost=(insideCart)=>{
 let returnedCost=insideCart.reduce((acc,curr)=>{
@@ -202,7 +195,8 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
                 ...state,
                 cartItems:remainingItems,
                 totalItems:count,
-                totalCost:costValue
+                totalCost:costValue,
+                productsData:JSON.parse(JSON.stringify(updatedCountInProducts))
             };
         }
     return state;
