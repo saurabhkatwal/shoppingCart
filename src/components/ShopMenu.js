@@ -8,7 +8,6 @@ export class ShopMenu extends Component {
     this.props.alertValue();
   }
   render() {
-    console.log(this.props.totalCost,"hii");
     return (
       <div className='shop-menu'>
         <div className="menu-header">

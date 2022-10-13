@@ -23,6 +23,6 @@ filteredData:state.filteredData
 }
 }
 const mapDispatchToProps=(dispatch)=>{
-
+return {}
 }
 export default connect(mapStateToProps,mapDispatchToProps)(App);

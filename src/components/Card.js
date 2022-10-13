@@ -6,7 +6,6 @@ export class Card extends Component {
     this.props.cartClick(e);
   }
   render() {
-    console.log(this.props.data.sku+"_1.jpg");
     return (
       <div id={this.props.data.id} className='card'>
         <img src={"images/"+this.props.data.sku+"_1.jpg"} alt="" />

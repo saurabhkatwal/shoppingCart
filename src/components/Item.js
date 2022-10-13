@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 export class Item extends Component {
-
+  // disableDec=(e)=>{
+  // }
   removeItemHandler=(e)=>{
     this.props.removeItem(e);
   }
@@ -19,7 +20,7 @@ export class Item extends Component {
         </div>
         <div className="product-info">
             <p className="title">{this.props.itemObj.title}</p>
-            <p>Quantity{this.props.itemObj.count}</p>
+            <p>Quantity {this.props.itemObj.count}</p>
         </div>
         <div className="price-info">
         <button className='remove' onClick={this.removeItemHandler}>X</button>
