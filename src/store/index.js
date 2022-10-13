@@ -18,6 +18,45 @@ console.log("after adding count property");
 
 console.log(products);
 
+const removeProducts=(productsToRemove,clickedId)=>{
+console.log("inside remove products");
+console.log(productsToRemove)
+let newProducts=productsToRemove.map(product=>{
+    if(product.id==clickedId){
+        console.log("before")
+        console.log(product);
+        product.count=0;
+        console.log(product)
+        console.log("after")
+        return product;
+    }
+    return product;
+})
+console.log("after resetting count to 0")
+console.log(newProducts)
+}
+const getTotalCost=(insideCart)=>{
+let returnedCost=insideCart.reduce((acc,curr)=>{
+    return acc+=(curr.count*curr.price)
+},0)
+console.log("current cost",returnedCost)
+return returnedCost;
+}
+
+const getCartItemsCount=(insideCart)=>{
+let count=insideCart.reduce((acc,curr)=>{
+    return acc+=curr.count;
+},0)
+console.log(count);
+return count;
+}
+const removeItemFromCart=(items,id)=>{
+
+let filteredItems=items.filter(item=>{
+    return item.id!=id;
+})
+return filteredItems;
+}
 const isPresent=(sizes,product)=>{
     for(let i=0;i<sizes.length;i++){
         if(product.availableSizes.includes(sizes[i].toUpperCase())){
@@ -79,7 +118,8 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
     filteredData:JSON.parse(JSON.stringify(products)),
     cartItems:[],
     showCart:false,
-    totalItems:0
+    totalItems:0,
+    totalCost:0
 },action)=>{
     if(action.type==="click"){
         let text=action.obj.target.innerText;
@@ -131,10 +171,15 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
             insideCart.push(returnedObj);
             console.log(insideCart);
         }
+        let count=getCartItemsCount(insideCart);
+        let costValue=getTotalCost(insideCart);
+
         return {
             ...state,
             productsData:JSON.parse(JSON.stringify(productsN)),
-            cartItems:JSON.parse(JSON.stringify(insideCart))
+            cartItems:JSON.parse(JSON.stringify(insideCart)),
+            totalItems:count,
+            totalCost:costValue
         }
         }
         if(action.type==="toggleCart"){
@@ -142,6 +187,23 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
                 ...state,
                 showCart:!state.showCart
             }
+        }
+        if(action.type==="removeItem"){
+            let clickedId=action.obj.target.parentElement.parentElement.id;
+            let itemsInCart=JSON.parse(JSON.stringify(state.cartItems));
+            let remainingItems=removeItemFromCart(itemsInCart,clickedId);
+            let products=JSON.parse(JSON.stringify(state.productsData));
+            let updatedCountInProducts=removeProducts(products,clickedId);
+            console.log("remaining items",remainingItems)
+            console.log(remainingItems)
+            let count=getCartItemsCount(remainingItems);
+            let costValue=getTotalCost(remainingItems);
+            return {
+                ...state,
+                cartItems:remainingItems,
+                totalItems:count,
+                totalCost:costValue
+            };
         }
     return state;
 }

@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+export class Item extends Component {
 
-export default class Item extends Component {
+  removeItemHandler=(e)=>{
+    this.props.removeItem(e);
+  }
   render() {
     return (
-      <div className='item'>
+      <div id={this.props.itemObj.id} className='item'>
         <div className="img-container">
         <img src={"/images/"+this.props.itemObj.sku+"_2.jpg"} alt="" />
         </div>
@@ -11,7 +15,7 @@ export default class Item extends Component {
             <p className="title">{this.props.itemObj.title}</p>
         </div>
         <div className="price-info">
-        <button className='remove'>X</button>
+        <button className='remove' onClick={this.removeItemHandler}>X</button>
             <p></p>
             <div className="btns">
                 <button>-</button>
@@ -22,3 +26,16 @@ export default class Item extends Component {
     )
   }
 }
+const mapStateToProps=(state)=>{
+return {
+
+}
+}
+const mapDispatchToProps=(dispatch=>{
+  return {
+    removeItem:(e)=>{
+      dispatch({type:"removeItem",obj:e})
+    }
+  }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Item)

@@ -9,6 +9,7 @@ export class ShopMenu extends Component {
         <div className="menu-header">
             <div className="cart-icon">
             <i className="fa-solid fa-cart-shopping fa-2x"></i>
+            {this.props.totalItems}
             </div>
             <h2>Cart</h2>
         </div>
@@ -20,7 +21,7 @@ export class ShopMenu extends Component {
                 <div className="checkout-details">
                     <p>Subtotal</p>
                     <div className="cost">
-                        <p>$ 0.00</p>
+                        <p>{this.props.totalCost}</p>
                         <p></p>
                     </div>
                 </div>
@@ -35,7 +36,9 @@ export class ShopMenu extends Component {
 }
 const mapStateToProps=(state)=>{
 return {
-    cartItems:state.cartItems
+    cartItems:state.cartItems,
+    totalItems:state.totalItems,
+    totalCost:state.totalCost
 }
 }
 const mapDispatchToProps=(dispatch)=>{

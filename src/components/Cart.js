@@ -8,7 +8,7 @@ export class Cart extends Component {
   render() {
     return (
       <div style={this.props.showCart?{right:0}:{}} className='cart'>
-        <button onClick={this.toggleCartHandler} className='cartToggleIcon'>{this.props.showCart?("X"):(<div className='value-icon'><i className="fa-solid fa-cart-shopping fa-2x"></i>{this.props.cartItems.length}</div>)}</button>
+        <button onClick={this.toggleCartHandler} className='cartToggleIcon'>{this.props.showCart?("X"):(<div className='value-icon'><i className="fa-solid fa-cart-shopping fa-2x"></i>{this.props.totalItems}</div>)}</button>
         <ShopMenu/>
       </div>
     )
@@ -17,7 +17,8 @@ export class Cart extends Component {
 const mapStateToProps=(state)=>{
 return {
   showCart:state.showCart,
-  cartItems:state.cartItems
+  cartItems:state.cartItems,
+  totalItems:state.totalItems
 }
 }
 const mapDispatchToProps=(dispatch)=>{
