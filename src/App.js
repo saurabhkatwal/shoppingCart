@@ -3,11 +3,13 @@ import React, { Component } from 'react'
 import Logo from './components/Logo';
 import Content from './components/Content'
 import Cart from './components/Cart';
-export default class App extends Component {
+import { connect } from 'react-redux';
+export class App extends Component {
   render() {
     return (
-      <div className=''>
+      <div className='app'>
         <Logo/>
+        <p>{this.props.filteredData.length} product(s) found</p>
         <Content/>
         <Cart/>
       </div>
@@ -15,3 +17,12 @@ export default class App extends Component {
   }
 }
 
+const mapStateToProps=(state)=>{
+return {
+filteredData:state.filteredData
+}
+}
+const mapDispatchToProps=(dispatch)=>{
+
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);

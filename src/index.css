@@ -18,6 +18,7 @@ code {
 .cards{
   display: grid;
   grid-template-columns: repeat(4,1fr);
+  row-gap: 20px;
 }
 .main{
   display: flex;
@@ -31,6 +32,16 @@ code {
 .card{
   width: 240px;
   text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.card button{
+  width: 100%;
+  padding: 10px 18px;
+  color: #fff;
+  background-color: #000;
 }
 img{
   width: 100%;
@@ -180,4 +191,19 @@ button{
 }
 .menu-body::-webkit-scrollbar{
   display: none;
+}
+.logo{
+  margin:20px 0 0 20px;
+}
+.app p{
+  text-align: center;
+}
+.filter h4{
+  margin-bottom: 20px;
+}
+.filter{
+  padding: 20px;
+}
+.cards{
+  padding-top: 20px;
 }

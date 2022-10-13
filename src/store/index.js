@@ -80,11 +80,6 @@ let [targetObj]=productsN.filter(product=>{
     return product.id==id;
 })
 
-console.log("inside method");
-console.log("target");
-console.log(targetObj);
-console.log(targetObj.count)
-
 return targetObj;
 }
 
