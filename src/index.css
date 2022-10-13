@@ -57,12 +57,13 @@ img{
 .filterSize{
   width: 40px;
   height: 40px;
-  background-color: grey;
+  /* background-color: grey; */
   border-radius: 50%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
 }
 /* .filterSize label{
   display: block;
@@ -115,9 +116,12 @@ button{
   width: 50px;
   height: 50px;
   left: -50px;
-  background-color:darkblue;
+  background-color:rgba(0,0,139,0.9);
   border: none;
   color: #fff;
+}
+.cartToggleIcon:hover{
+  background-color: rgba(0,0,139);
 }
 .menu-header{
   display: flex;
@@ -169,7 +173,7 @@ button{
 .item{
   display: flex;
   height: 100px;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: red;
   padding: 10px;

@@ -270,10 +270,10 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
             return {
                 ...state,
                 totalCost:0,
-                productsData:[],
+                productsData:products,
                 cartItems:[],
                 totalItems:0,
-                count:0
+                showCart:false
             }
         }
     return state;

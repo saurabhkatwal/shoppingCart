@@ -27,7 +27,7 @@ export class ShopMenu extends Component {
                     <p>Subtotal</p>
                     <div className="cost">
                         <p>${this.props.totalCost.toFixed(2)}</p>
-                        <p></p>
+                        {/* <p></p> */}
                     </div>
                 </div>
                 <div className="checkout-btn">
