@@ -3,7 +3,12 @@ import { connect } from 'react-redux'
 import Items from './Items'
 
 export class ShopMenu extends Component {
+  
+  alertHandler=()=>{
+    this.props.alertValue();
+  }
   render() {
+    console.log(this.props.totalCost,"hii");
     return (
       <div className='shop-menu'>
         <div className="menu-header">
@@ -26,7 +31,7 @@ export class ShopMenu extends Component {
                     </div>
                 </div>
                 <div className="checkout-btn">
-                    <button>Checkout</button>
+                    <button onClick={this.alertHandler}>Checkout</button>
                 </div>
             </div>
         </div>
@@ -43,7 +48,9 @@ return {
 }
 const mapDispatchToProps=(dispatch)=>{
 return {
-
+alertValue:()=>{
+  dispatch({type:"alertValue"});
+}
 }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ShopMenu);

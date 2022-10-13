@@ -18,6 +18,7 @@ console.log("after adding count property");
 
 console.log(products);
 
+
 const removeProducts=(productsToRemove,clickedId)=>{
 let newProducts=productsToRemove.map(product=>{
     if(product.id==clickedId){
@@ -198,6 +199,87 @@ let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
                 totalCost:costValue,
                 productsData:JSON.parse(JSON.stringify(updatedCountInProducts))
             };
+        }
+        if(action.type==="increment"){
+            console.log("increment action");
+            let clickedBtnId=action.obj.target.parentElement.id;
+            let cartItemsList=JSON.parse(JSON.stringify(state.cartItems));
+            let productsList=JSON.parse(JSON.stringify(state.productsData));
+            let count=state.totalItems;
+            let cost=state.totalCost;
+            console.log("cartItemsList",cartItemsList);
+            console.log("productsList",productsList);
+            let trimmedId=clickedBtnId.substr(0,clickedBtnId.length-3);
+            console.log("trimmedId",trimmedId);
+            console.log(typeof trimmedId);
+            for(let i=0;i<productsList.length;i++){
+                if(productsList[i].id==trimmedId){
+                    productsList[i].count+=1;
+                }
+            }
+            console.log("printing cartItemsList");
+            for(let i=0;i<cartItemsList.length;i++){
+                console.log("inside cart items")
+                console.log("matching cartitem id ",String(cartItemsList[i].id),"trimmed id ",trimmedId);
+                console.log(typeof cartItemsList.id);
+                if(String(cartItemsList[i].id)==trimmedId){
+                    console.log("cartItem matched")
+                    cartItemsList[i].count+=1;
+                    count++;
+                    cost+=cartItemsList[i].price
+                }
+            }
+            return {
+                ...state,
+                productsData:productsList,
+                cartItems:cartItemsList,
+                totalCost:cost,
+                totalItems:count
+            }
+        }
+        if(action.type==="decrement"){
+            console.log("decrement action")
+            let clickedBtnId=action.obj.target.parentElement.id;
+            let cartItemsList=JSON.parse(JSON.stringify(state.cartItems));
+            let productsList=JSON.parse(JSON.stringify(state.productsData));
+            let trimmedId=clickedBtnId.substr(0,clickedBtnId.length-3);
+            let count=state.totalItems;
+            let cost=state.totalCost;
+            for(let i=0;i<productsList.length;i++){
+                if(productsList[i].id==trimmedId&&productsList[i].count>0){
+                    productsList[i].count-=1;
+                }
+            }
+            for(let i=0;i<cartItemsList.length;i++){
+                if(cartItemsList[i].id==trimmedId&&cartItemsList[i].count>1){
+                    cartItemsList[i].count-=1;
+                    count--;
+                    cost-=cartItemsList[i].price;
+                }
+            }
+            return {
+                ...state,
+                productsData:productsList,
+                cartItems:cartItemsList,
+                totalCost:cost,
+                totalItems:count
+            }
+        }
+        // if(action.type==="checkout"){
+
+        //     return state;
+        // }
+        if(action.type==="alertValue"){
+            let cost=state.totalCost;
+            alert("your subtotal is $"+cost);
+            return {
+                ...state,
+                totalCost:0,
+                productsData:[],
+                cartItems:[],
+                totalItems:0,
+                count:0
+            }
         }
     return state;
 }

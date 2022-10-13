@@ -5,6 +5,12 @@ export class Item extends Component {
   removeItemHandler=(e)=>{
     this.props.removeItem(e);
   }
+  incrementHandler=(e)=>{
+    this.props.increment(e);
+  }
+  decrementHandler=(e)=>{
+    this.props.decrement(e);
+  }
   render() {
     return (
       <div id={this.props.itemObj.id} className='item'>
@@ -13,13 +19,14 @@ export class Item extends Component {
         </div>
         <div className="product-info">
             <p className="title">{this.props.itemObj.title}</p>
+            <p>Quantity{this.props.itemObj.count}</p>
         </div>
         <div className="price-info">
         <button className='remove' onClick={this.removeItemHandler}>X</button>
             <p></p>
-            <div className="btns">
-                <button>-</button>
-                <button>+</button>
+            <div id={this.props.itemObj.id+"btn"}className="btns">
+                <button onClick={this.decrementHandler}>-</button>
+                <button onClick={this.incrementHandler}>+</button>
             </div>
         </div>
       </div>
@@ -35,6 +42,12 @@ const mapDispatchToProps=(dispatch=>{
   return {
     removeItem:(e)=>{
       dispatch({type:"removeItem",obj:e})
+    },
+    increment:(e)=>{
+      dispatch({type:"increment",obj:e})
+    },
+    decrement:(e)=>{
+      dispatch({type:"decrement",obj:e})
     }
   }
 })
