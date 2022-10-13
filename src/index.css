@@ -36,12 +36,20 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 .card button{
   width: 100%;
   padding: 10px 18px;
   color: #fff;
   background-color: #000;
+  border:none;
+}
+.card button:hover{
+background-color: #eabf00;
+}
+.card img{
+  width: 70%;
 }
 img{
   width: 100%;
@@ -132,10 +140,11 @@ button{
 .menu-checkout{
   height: 130px;
   position: absolute;
-  bottom: 0;
   width: 100%;
   z-index: 2;
   background-color: rgba(0, 0, 0,1);
+  /* padding-bottom: 20px; */
+  /* background-color: red; */
 }
 .checkout-container{
   display: flex;
@@ -147,7 +156,7 @@ button{
 .checkout-details{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .checkout-btn button{
   width: 100%;
@@ -155,7 +164,7 @@ button{
   background-color: #000;
   color: #fff;
   padding: 10px;
-  border: 1px solid #fff;
+  border: 1px solid #555;
 }
 .item{
   display: flex;
