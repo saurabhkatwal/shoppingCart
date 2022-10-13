@@ -188,6 +188,8 @@ button{
 .price-info{
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .btns{
   display: flex;
@@ -219,4 +221,7 @@ button{
 }
 .cards{
   padding-top: 20px;
+}
+.remove p{
+  margin: 10px 0;
 }

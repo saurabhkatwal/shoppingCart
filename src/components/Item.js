@@ -23,8 +23,8 @@ export class Item extends Component {
             <p>Quantity {this.props.itemObj.count}</p>
         </div>
         <div className="price-info">
-        <button className='remove' onClick={this.removeItemHandler}>X</button>
-            <p></p>
+          <button className='remove' onClick={this.removeItemHandler}>X</button>
+            <p>${this.props.itemObj.price}</p>
             <div id={this.props.itemObj.id+"btn"}className="btns">
                 <button onClick={this.decrementHandler}>-</button>
                 <button onClick={this.incrementHandler}>+</button>

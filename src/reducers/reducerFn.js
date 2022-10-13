@@ -7,10 +7,13 @@ import alertValueAction from '../actions/alertValueAction'
 import data from "./products.js"
 let products=[];
 
-for(let i=0;i<data.products.length;i++){
-    let obj={...data.products[i],count:0};
-    products.push(obj);
-}
+products=data.products.map(product=>{
+    return {...product,count:0}
+})
+// for(let i=0;i<data.products.length;i++){
+//     let obj={...data.products[i],count:0};
+//     products.push(obj);
+// }
 let reducerFn=(state={productsData:JSON.parse(JSON.stringify(products)),
     sizes:["xs","s","m","ml","l","xl","xxl"],
     activeToggles:{
