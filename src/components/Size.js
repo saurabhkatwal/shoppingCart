@@ -12,7 +12,7 @@ export class Size extends Component {
     return (
       <div className='filterSize' onClick={this.clickHandler}>
         {/* { console.log("current adfa"+this.props.activeToggles[this.props.size])} */}
-        <button>{this.props.size}</button>
+        <button style={this.props.activeToggles[this.props.size]?{color:"#fff",backgroundColor:"#000"}:{}}>{this.props.size}</button>
       </div>
     )
   } 
